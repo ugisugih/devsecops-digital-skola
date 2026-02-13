@@ -24,6 +24,8 @@ jobs:
           pip install -r dev-requirements.txt
 
       - name: Run Pytest
+        env:
+          PYTHONPATH: .
         run: pytest
 
 
@@ -37,7 +39,7 @@ jobs:
         run: pip install bandit
 
       - name: Run Bandit
-        run: bandit -r .
+        run: bandit -r app
 
 
   sca:
@@ -49,11 +51,8 @@ jobs:
       - name: Install pip-audit
         run: pip install pip-audit
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
       - name: Run pip-audit
-        run: pip-audit
+        run: pip-audit -r requirements.txt
 
 
   secret_scan:
